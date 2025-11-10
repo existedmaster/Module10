@@ -51,7 +51,13 @@ jobs:
           source venv/bin/activate
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
-          playwright install  # if you use Playwright for e2e tests
+        env:
+          DATABASE_URL: postgresql://user:password@localhost:5432/mytestdb
+      
+      - name: Install Playwright
+        run: |
+          source venv/bin/activate
+          playwright install
         env:
           DATABASE_URL: postgresql://user:password@localhost:5432/mytestdb
 
@@ -60,6 +66,11 @@ jobs:
 
       - name: Verify Pip version
         run: python -m pip --version
+
+      - name: Verify Playwright installation
+        run: |
+          source venv/bin/activate
+          playwright --version
 
       - name: Run tests
         env:
