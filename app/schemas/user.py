@@ -1,6 +1,6 @@
 from typing import Optional
 from uuid import UUID
-from datetime import datetime
+from datetime import datetime #Creates a datetime object
 from pydantic import BaseModel, EmailStr, ConfigDict
 
 class UserResponse(BaseModel):

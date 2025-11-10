@@ -1,7 +1,7 @@
 from pydantic import BaseModel, EmailStr, Field, ConfigDict, ValidationError, model_validator
 from typing import Optional
-from uuid import UUID
-from datetime import datetime
+from uuid import UUID #creates a UUID object
+from datetime import datetime #creates a datetime object
 
 
 class UserBase(BaseModel):
