@@ -40,12 +40,15 @@ jobs:
             ${{ runner.os }}-pip-
       
       - name: Create virtual environment
+        working-directory: ./Module10
         run: python -m venv venv
 
       - name: List venv directory
+        working-directory: ./Module10
         run: ls -al venv
 
       - name: Install dependencies
+        working-directory: ./Module10
         run: |
           python -m venv venv
           source venv/bin/activate
@@ -53,26 +56,31 @@ jobs:
           python -m pip install -r requirements.txt
         env:
           DATABASE_URL: postgresql://user:password@localhost:5432/mytestdb
-      
+
       - name: Install Playwright
+        working-directory: ./Module10
         run: |
           source venv/bin/activate
-          playwright install
+          npx playwright install
         env:
           DATABASE_URL: postgresql://user:password@localhost:5432/mytestdb
 
       - name: Verify Python version
+        working-directory: ./Module10
         run: python --version
 
       - name: Verify Pip version
+        working-directory: ./Module10
         run: python -m pip --version
 
       - name: Verify Playwright installation
+        working-directory: ./Module10
         run: |
           source venv/bin/activate
-          playwright --version
+          npx playwright --version
 
       - name: Run tests
+        working-directory: ./Module10
         env:
           DATABASE_URL: postgresql://user:password@localhost:5432/mytestdb
         run: |
