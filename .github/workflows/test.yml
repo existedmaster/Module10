@@ -43,10 +43,10 @@ jobs:
         run: |
           python -m venv venv
           source venv/bin/activate
-          pip install --upgrade pip
-          pip install -r requirements.txt
-          playwright install  # if you use Playwright for e2e tests
-      
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m playwright install  # if you use Playwright for e2e tests
+
       - name: Run tests
         env:
           DATABASE_URL: postgresql://user:password@localhost:5432/mytestdb
@@ -84,7 +84,7 @@ jobs:
     needs: security
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    environment: production
+    environment: prod
     steps:
       - uses: actions/checkout@v4
       
