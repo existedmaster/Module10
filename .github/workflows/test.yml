@@ -39,16 +39,28 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
       
+      - name: Create virtual environment
+        run: python -m venv venv
+
+      - name: List venv directory
+        run: ls -al venv
+
       - name: Install dependencies
-        env:
-          DATABASE_URL: postgresql://user:password@localhost:5432/mytestdb
         run: |
           python -m venv venv
           source venv/bin/activate
-          pip install --upgrade pip
-          pip install -r requirements.txt
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
           playwright install  # if you use Playwright for e2e tests
-      
+        env:
+          DATABASE_URL: postgresql://user:password@localhost:5432/mytestdb
+
+      - name: Verify Python version
+        run: python --version
+
+      - name: Verify Pip version
+        run: python -m pip --version
+
       - name: Run tests
         env:
           DATABASE_URL: postgresql://user:password@localhost:5432/mytestdb
